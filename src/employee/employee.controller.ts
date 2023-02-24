@@ -1,5 +1,5 @@
 import { Controller, Get, Body, Delete, Param, Post, Put, Query, ParseIntPipe, UsePipes, ValidationPipe} from '@nestjs/common';
-import { Employee } from './employeeDTO.dto';
+import { EmployeeDTO } from './employeeDTO.dto';
 import { EmployeeService } from './employee.service';
 
 @Controller('employee')
@@ -23,24 +23,24 @@ export class EmployeeController {
 
   @Post('/add')
   @UsePipes(new ValidationPipe())
-  addEmployee(@Body() employeeDTO: Employee): any {
+  addEmployee(@Body() employeeDTO: EmployeeDTO): any {
     return this.EmployeeService.addEmployee(employeeDTO);
   }
 
   @Put('/update')
   updateEmployee(
-    @Body('name') name: string,
-    @Body('id', ParseIntPipe) id: number,
+    @Body() employeeDTO: EmployeeDTO,
+    // @Body('id', ParseIntPipe) id: number,
   ): any {
-    return this.EmployeeService.updateEmployee(name, id);
+    return this.EmployeeService.updateEmployee( employeeDTO,employeeDTO.userId);
   }
 
   @Put('/update/:id')
   updateEmployeeById(
-    @Body('name') name: string,
+    @Body() employeeDTO: EmployeeDTO,
     @Param('id', ParseIntPipe) id: number,
   ): any {
-    return this.EmployeeService.updateEmployeeById(name, id);
+    return this.EmployeeService.updateEmployeeById(employeeDTO, id);
   }
 
   @Delete('/delete/:id')

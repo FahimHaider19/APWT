@@ -1,55 +1,77 @@
 import { Injectable } from "@nestjs/common";
-import { Payment } from "./paymentDTO.dto";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { PaymentEntity } from "./payment.entity";
+import { PaymentDTO } from "./paymentDTO.dto";
 
 @Injectable()
-export class PaymentService{
-  getIndex() : string {
-    return "Payment Index";
+export class PaymentService {
+  constructor(
+    @InjectRepository(PaymentEntity)
+    private PaymentRepo: Repository<PaymentEntity>,
+  ) {}
+
+  getIndex(): any {
+    return this.PaymentRepo.find();
   }
 
-  getPaymentByID(id):any {
-    return "Payment ID: "+id;
+  getPaymentByID(id): any {
+    return this.PaymentRepo.find(id);
   }
 
-  getVerificationByID(id):any {
-    return "Payment "+ id +"Verified";
+  getVerificationByID(id): any {
+    return this.PaymentRepo.findOne({
+      select: ['verificationStatus'],
+      where: { userId: id },
+    });
   }
 
-  getPaymentByIDName(qry):any {
-    return "Payment ID: "+qry.id +", UserName: "+qry.name;
+  getPaymentByIDName(qry): any {
+    if (qry.id) {
+      return this.PaymentRepo.find(qry.id);
+    } 
+    // else if (qry.name) {
+    //   return this.PaymentRepo.findOne({ where: { name: qry.name } });
+    // }  
+}
+
+  AddPayment(paymentDTO: PaymentDTO): any {
+    const payment = new PaymentEntity();
+    payment.userId = paymentDTO.userId;
+    payment.amount = paymentDTO.amount;
+    payment.date = paymentDTO.date;
+    payment.paymentTo = paymentDTO.paymentTo;
+    payment.verificationStatus = paymentDTO.verificationStatus;
+    return this.PaymentRepo.save(payment);
   }
 
-  AddPayment(paymentDTO:Payment):any {
-    return "Payment UserName: " + paymentDTO.name+" , Payment ID: " + paymentDTO.id;
+  updatePayment(paymentDTO, id): any {
+    return this.PaymentRepo.update(id, paymentDTO);
   }
 
-  updatePayment(name,id):any {
-    return "Payment updated name: " +name+" and id is " +id;
+  updatePaymentById(paymentDTO, id): any {
+    return this.PaymentRepo.update(id, paymentDTO);
   }
 
-  updatePaymentById(name,id):any {
-    return "Update Payment where id " +id+" and change name to " +name;
+  deletePaymentById(id): any {
+    return this.PaymentRepo.delete(id);
   }
 
-  deletePaymentById(id):any {
-    return "Payment ID:"+id+" Deleted.";
+  RefundPayment(id): any {
+    return 'Payment ID:' + id + ' Refunded.';
   }
 
-  RefundPayment(id):any {
-    return "Payment ID:"+id+" Refunded.";
-  }
-  
-  TradePaymentTransfer(qry):any {
-    return "Trade=> From:"+qry.from+", To:"+qry.to+", Amount:"+qry.amount;
+  TradePaymentTransfer(qry): any {
+    return (
+      'Trade=> From:' + qry.from + ', To:' + qry.to + ', Amount:' + qry.amount
+    );
   }
 
-  ItemListing(qry):any {
-    return "Item Name:"+qry.item+", Price:"+qry.price;
+  ItemListing(qry): any {
+    return 'Item Name:' + qry.item + ', Price:' + qry.price;
   }
 
-  getUserPayments(name):any {
-    return "Payment list of user:"+name;
+  getUserPayments(name): any {
+    return 'Payment list of user:' + name;
   }
-
-  
 }
