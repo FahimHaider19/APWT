@@ -4,6 +4,5 @@ export class CustomerDTO {
   email: string;
   password: string;
   phone: string;
-  verificationStatus: string;
   role: string;
 }

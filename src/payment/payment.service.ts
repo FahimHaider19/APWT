@@ -1,14 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PaymentEntity } from "./entities/payment.entity";
+import { Payment } from "./entities/payment.entity";
 import { PaymentDTO } from "./dto/paymentDTO.dto";
 
 @Injectable()
 export class PaymentService {
   constructor(
-    @InjectRepository(PaymentEntity)
-    private PaymentRepo: Repository<PaymentEntity>,
+    @InjectRepository(Payment)
+    private PaymentRepo: Repository<Payment>,
   ) {}
 
   getIndex(): any {
@@ -36,11 +36,10 @@ export class PaymentService {
 }
 
   AddPayment(paymentDTO: PaymentDTO): any {
-    const payment = new PaymentEntity();
+    const payment = new Payment();
     payment.userId = paymentDTO.userId;
     payment.amount = paymentDTO.amount;
     payment.date = paymentDTO.date;
-    payment.paymentTo = paymentDTO.paymentTo;
     payment.verificationStatus = paymentDTO.verificationStatus;
     return this.PaymentRepo.save(payment);
   }

@@ -1,4 +1,5 @@
 import { EmployeeModule } from './employee/employee.module';
+import { CustomerModule } from './customer/customer.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,13 +10,12 @@ import { GameModule } from './game/game.module';
 import { NewsModule } from './news/news.module';
 import { CategoryModule } from './category/category.module';
 import { RefundModule } from './refund/refund.module';
-import { ProductRecordModule } from './product-record/product-record.module';
-import { ReceiptModule } from './receipt/receipt.module';
 import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
     AuthModule,
+    CustomerModule,
     EmployeeModule,
     PaymentModule,
     TypeOrmModule.forRoot({
@@ -32,8 +32,6 @@ import { ReviewModule } from './review/review.module';
     NewsModule,
     CategoryModule,
     RefundModule,
-    ProductRecordModule,
-    ReceiptModule,
     ReviewModule,
   ],
   controllers: [AppController],

@@ -48,8 +48,8 @@ export class EmployeeController {
     return this.EmployeeService.deleteEmployeeById(id);
   }
 
-  @Get('verify/:id')
-  getVerificationByID(@Param('id', ParseIntPipe) id: number): any {
-    return this.EmployeeService.getVerificationByID(id);
-  }
+  // @Get('verify/:id')
+  // getVerificationByID(@Param('id', ParseIntPipe) id: number): any {
+  //   return this.EmployeeService.getVerificationByID(id);
+  // }
 }

@@ -10,7 +10,8 @@ export class GameService {
   constructor(
     @InjectRepository(Game)
     private GameRepo: Repository<Game>,
-    protected GameImageRepo: Repository<GameImages>,
+    @InjectRepository(GameImages)
+    private GameImagesRepo: Repository<GameImages>,
   ) {}
   
   async create(GameDto: GameDto) {

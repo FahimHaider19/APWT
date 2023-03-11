@@ -1,3 +1,4 @@
+import { Category } from 'src/category/entities/category.entity';
 import { News } from 'src/news/entities/news.entity';
 import { Review } from 'src/review/entities/review.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
@@ -37,6 +38,9 @@ export class Game {
 
   @Column()
   systemRequirments: string;
+
+  @OneToMany((type) => Category, (gameCategory) => gameCategory.game)
+  gameCategory: Category[];
 
   @OneToMany((type) => GameImages, (gameImages) => gameImages.game, {cascade: true})
   gameImages: GameImages[];

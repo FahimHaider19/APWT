@@ -29,7 +29,7 @@ export class EmployeeDTO {
   })
   password: string;
   
-  verificationStatus: boolean;
+  // verificationStatus: boolean;
 }
 
 export class EmployeeLoginDTO {

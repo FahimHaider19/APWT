@@ -25,8 +25,6 @@ export class Customer {
   @Column({ default: 'customer' })
   role: string;
 
-  @Column()
-  verificationStatus: string;
 
   @OneToMany(type => Library, library => library.customer)
   library: Library;
@@ -42,4 +40,5 @@ export class Customer {
 
   @OneToMany(type => Review, review => review.customer)
   reviews: Review;
+  refunds: any;
 }

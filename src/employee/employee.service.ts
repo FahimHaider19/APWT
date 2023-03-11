@@ -19,12 +19,12 @@ export class EmployeeService {
     return this.EmployeeRepo.find(id);
   }
 
-  getVerificationByID(id): any {
-    return this.EmployeeRepo.findOne({
-      select: ['verificationStatus'],
-      where: { userId: id },
-    });
-  }
+  // getVerificationByID(id): any {
+  //   return this.EmployeeRepo.findOne({
+  //     select: ['verificationStatus'],
+  //     where: { userId: id },
+  //   });
+  // }
 
   getEmployeeByIDName(qry): any {
     if (qry.id) {
@@ -46,7 +46,7 @@ export class EmployeeService {
     employee.email = employeeDTO.email;
     employee.phone = employeeDTO.phone;
     employee.password = employeeDTO.password;
-    employee.verificationStatus = false;
+    // employee.verificationStatus = false;
     return this.EmployeeRepo.save(employee);
   }
 
