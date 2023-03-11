@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EmployeeEntity } from './employee.entity';
-import { EmployeeDTO } from './employeeDTO.dto';
+import { EmployeeEntity } from './entities/employee.entity';
+import { EmployeeDTO } from './dto/employeeDTO.dto';
 
 @Injectable()
 export class EmployeeService {
@@ -32,6 +32,12 @@ export class EmployeeService {
     } else if (qry.name) {
       return this.EmployeeRepo.findOne({ where: { name: qry.name } });
     }
+  }
+
+  getEmployeeByEmail(email, password): any {
+    return this.EmployeeRepo.findOne({
+      where: { email: email, password: password },
+    });
   }
 
   addEmployee(employeeDTO: EmployeeDTO): any {

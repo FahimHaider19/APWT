@@ -1,5 +1,5 @@
 import { Controller, Get, Body, Delete, Param, Post, Put, Query} from '@nestjs/common';
-import { PaymentDTO } from './paymentDTO.dto';
+import { PaymentDTO } from './dto/paymentDTO.dto';
 import { PaymentService } from './payment.service';
 
 @Controller('payment')
@@ -75,6 +75,4 @@ export class PaymentController {
     getUserPayments(@Param("name") name:string): any {
       return this.PaymentService.getUserPayments(name);
     }
-
-
 }

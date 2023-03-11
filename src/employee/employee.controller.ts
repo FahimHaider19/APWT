@@ -1,5 +1,5 @@
 import { Controller, Get, Body, Delete, Param, Post, Put, Query, ParseIntPipe, UsePipes, ValidationPipe} from '@nestjs/common';
-import { EmployeeDTO } from './employeeDTO.dto';
+import { EmployeeDTO } from './dto/employeeDTO.dto';
 import { EmployeeService } from './employee.service';
 
 @Controller('employee')

@@ -19,4 +19,7 @@ export class EmployeeEntity {
 
   @Column({nullable: true})
   verificationStatus: boolean;
+
+  @Column({default: "employee"})
+  role: string;
 }
