@@ -12,7 +12,7 @@ export class GameDto {
   // gameDeveloper: string;
   gamePublisher: string; //object....many to one
   systemRequirments: string;
-  gameImages: string[]; //one to many
+  GameImage: string[]; //one to many
   gameNews: News[]; //one to many
   gameReviews: number; //one to many
   isDlc: boolean;

@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { GameDto } from './dto/game.dto';
-import { GameImages } from './entities/game-image.entity';
+import { GameCategory } from './entities/game-category.entity';
+import { GameImage } from './entities/game-image.entity';
 import { Game } from './entities/game.entity';
 
 @Injectable()
@@ -10,13 +11,15 @@ export class GameService {
   constructor(
     @InjectRepository(Game)
     private GameRepo: Repository<Game>,
-    @InjectRepository(GameImages)
-    private GameImagesRepo: Repository<GameImages>,
+    @InjectRepository(GameCategory)
+    private GameCategory: Repository<GameCategory>,
+    @InjectRepository(GameImage)
+    private GameImageRepo: Repository<GameImage>,
   ) {}
   
   async create(GameDto: GameDto) {
     const game = new Game();
-    const gameImages:Array<GameImages> = [];
+    const gameImages:Array<GameImage> = [];
     game.gameName = GameDto.gameName;
     game.gameDescription = GameDto.gameDescription;
     game.gamePrice = GameDto.gamePrice;
@@ -30,27 +33,27 @@ export class GameService {
     game.isDlc = GameDto.isDlc;
     game.prerequisit = GameDto.prerequisit;
 
-    for(let link of GameDto.gameImages){
-      const gameImage = new GameImages();
+    for(let link of GameDto.GameImage){
+      const gameImage = new GameImage();
       gameImage.link = link;
       gameImages.push(gameImage);
     }
-    game.gameImages = gameImages;
+    game.GameImage = gameImages;
     
     return this.GameRepo.save(game);
   }
 
   findAll() {
-    return this.GameRepo.find(
-      {
-        relations: {gameImages: true}
+    return this.GameRepo.find({
+        relations: {GameImage: true}
       }
     );
   }
 
   findOne(id: number) {
     return this.GameRepo.find(
-      { relations: {gameImages: true},
+      { 
+        relations: {GameImage: true},
         where: {gameId: id}
       }
     );
@@ -58,7 +61,7 @@ export class GameService {
 
   update(id: number, GameDto: GameDto) {
     const game = new Game();
-    const gameImages: Array<GameImages> = [];
+    const gameImages: Array<GameImage> = [];
     game.gameName = GameDto.gameName;
     game.gameDescription = GameDto.gameDescription;
     game.gamePrice = GameDto.gamePrice;
@@ -72,12 +75,12 @@ export class GameService {
     game.isDlc = GameDto.isDlc;
     game.prerequisit = GameDto.prerequisit;
 
-    for (let link of GameDto.gameImages) {
-      const gameImage = new GameImages();
+    for (let link of GameDto.GameImage) {
+      const gameImage = new GameImage();
       gameImage.link = link;
       gameImages.push(gameImage);
     }
-    game.gameImages = gameImages;
+    game.GameImage = gameImages;
 
     return this.GameRepo.update(id, game);
   }

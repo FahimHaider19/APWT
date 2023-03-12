@@ -15,4 +15,4 @@ export class RefundGames {
 
 }
 
-// export default GameImages;
+// export default GameImage;

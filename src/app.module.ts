@@ -8,7 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { GameModule } from './game/game.module';
 import { NewsModule } from './news/news.module';
-import { CategoryModule } from './category/category.module';
 import { RefundModule } from './refund/refund.module';
 import { ReviewModule } from './review/review.module';
 
@@ -30,7 +29,6 @@ import { ReviewModule } from './review/review.module';
     }),
     GameModule,
     NewsModule,
-    CategoryModule,
     RefundModule,
     ReviewModule,
   ],

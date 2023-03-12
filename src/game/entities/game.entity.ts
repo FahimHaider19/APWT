@@ -1,8 +1,8 @@
-import { Category } from 'src/game/entities/category.entity';
+import { GameCategory } from 'src/game/entities/game-category.entity';
 import { News } from 'src/news/entities/news.entity';
 import { Review } from 'src/review/entities/review.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { GameImages } from './game-image.entity';
+import { GameImage } from './game-image.entity';
 
 @Entity('game')
 export class Game {
@@ -39,11 +39,11 @@ export class Game {
   @Column()
   systemRequirments: string;
 
-  @OneToMany((type) => Category, (gameCategory) => gameCategory.game)
-  gameCategory: Category[];
+  @OneToMany((type) => GameCategory, (gameCategory) => gameCategory.game)
+  gameCategory: GameCategory[];
 
-  @OneToMany((type) => GameImages, (gameImages) => gameImages.game, {cascade: true})
-  gameImages: GameImages[];
+  @OneToMany((type) => GameImage, (GameImage) => GameImage.game, {cascade: true})
+  GameImage: GameImage[];
 
   @OneToMany((type) => News, (gameNews) => gameNews.game)
   gameNews: News[];
