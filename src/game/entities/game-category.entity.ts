@@ -2,7 +2,7 @@ import { Game } from 'src/game/entities/game.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity('categories')
-export class Category {
+export class GameCategory {
     @PrimaryGeneratedColumn()
     categoryId: number;
 
