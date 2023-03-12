@@ -2,7 +2,7 @@ import { Game } from 'src/game/entities/game.entity';
 import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Customer } from './Customer.entity';
 
-@Entity('game-images')
+@Entity('customer-cart')
 export class Cart {
   @PrimaryGeneratedColumn()
   gameImageId: number;

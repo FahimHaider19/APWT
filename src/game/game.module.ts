@@ -3,7 +3,7 @@ import { GameService } from './game.service';
 import { GameController } from './game.controller';
 import { Game } from './entities/game.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GameImages } from './entities/game-images.entity';
+import { GameImages } from './entities/game-image.entity';
 import { Review } from 'src/review/entities/review.entity';
 
 @Module({

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
-import { Category } from 'src/category/entities/category.entity';
+import { Category } from 'src/game/entities/category.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({

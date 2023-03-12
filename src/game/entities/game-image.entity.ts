@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
 import { Game } from './game.entity';
 
-@Entity('game-images')
+@Entity('game-image')
 export class GameImages {
   @PrimaryGeneratedColumn()
   gameImageId: number;

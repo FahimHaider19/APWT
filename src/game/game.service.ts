@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { GameDto } from './dto/game.dto';
-import { GameImages } from './entities/game-images.entity';
+import { GameImages } from './entities/game-image.entity';
 import { Game } from './entities/game.entity';
 
 @Injectable()

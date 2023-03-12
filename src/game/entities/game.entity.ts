@@ -1,8 +1,8 @@
-import { Category } from 'src/category/entities/category.entity';
+import { Category } from 'src/game/entities/category.entity';
 import { News } from 'src/news/entities/news.entity';
 import { Review } from 'src/review/entities/review.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { GameImages } from './game-images.entity';
+import { GameImages } from './game-image.entity';
 
 @Entity('game')
 export class Game {
