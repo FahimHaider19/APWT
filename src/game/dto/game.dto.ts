@@ -1,4 +1,5 @@
-import { News } from "src/news/entities/news.entity";
+import { NewsDto } from "src/news/dto/news.dto";
+import { GameCategoryDto } from "./game-category.dto";
 import { GameImageDto } from "./game-image.dto";
 
 export class GameDto {
@@ -12,8 +13,9 @@ export class GameDto {
   // gameDeveloper: string;
   gamePublisher: string; //object....many to one
   systemRequirments: string;
-  GameImage: string[]; //one to many
-  gameNews: News[]; //one to many
+  gameImage: GameImageDto[]; //one to many
+  gameCategory: GameCategoryDto[]; //one to many
+  gameNews: NewsDto[]; //one to many
   gameReviews: number; //one to many
   isDlc: boolean;
   prerequisit: number; //inner table relationship, another game

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { NewsDto } from './dto/news.dto';
 
@@ -21,7 +21,7 @@ export class NewsController {
     return this.newsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() NewsDto: NewsDto) {
     return this.newsService.update(+id, NewsDto);
   }

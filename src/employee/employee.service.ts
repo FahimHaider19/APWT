@@ -15,8 +15,15 @@ export class EmployeeService {
     return this.EmployeeRepo.find();
   }
 
-  getEmployeeByID(id): any {
-    return this.EmployeeRepo.find(id);
+  getEmployeeByID(userId): any {
+    return this.EmployeeRepo.findOne(userId);
+    // const data = this.EmployeeRepo.findOne(userId);
+    // if(data){
+    //   return data;
+    // }
+    // else{
+    //   return {message: "No data found"};
+    // }
   }
 
   // getVerificationByID(id): any {
@@ -26,13 +33,13 @@ export class EmployeeService {
   //   });
   // }
 
-  getEmployeeByIDName(qry): any {
-    if (qry.id) {
-      return this.EmployeeRepo.find(qry.id);
-    } else if (qry.name) {
-      return this.EmployeeRepo.findOne({ where: { name: qry.name } });
-    }
-  }
+  // getEmployeeByIDName(qry): any {
+  //   if (qry.id) {
+  //     return this.EmployeeRepo.find(qry.id);
+  //   } else if (qry.name) {
+  //     return this.EmployeeRepo.findOne({ where: { name: qry.name } });
+  //   }
+  // }
 
   getEmployeeByEmail(email, password): any {
     return this.EmployeeRepo.findOne({

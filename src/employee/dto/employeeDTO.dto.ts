@@ -1,12 +1,12 @@
 import { IsEmail, IsInt, IsNotEmpty, IsPhoneNumber, Length, Matches } from 'class-validator';
 export class EmployeeDTO {
-  @IsNotEmpty({ message: 'User ID is required' })
-  @IsInt({ message: 'User ID must be a number' })
+  // @IsNotEmpty({ message: 'User ID is required' })
+  // @IsInt({ message: 'User ID must be a number' })
   userId: number;
 
   @IsNotEmpty({ message: 'Name is required' })
   @Length(3, 50, { message: 'Name must of 3 to 50 characters' })
-  @Matches(/^[a-zA-Z.]*$/, { message: 'Name is not valid' })
+  @Matches(/^[ a-zA-Z.]*$/, { message: 'Name is not valid' })
   name: string;
 
   @IsNotEmpty({ message: 'Email is required' })

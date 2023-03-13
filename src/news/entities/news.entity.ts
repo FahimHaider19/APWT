@@ -13,9 +13,6 @@ export class News {
     newsDescription: string;
     
     @Column()
-    newsImage: string;
-    
-    @Column()
     newsDate: Date;
     
     @ManyToOne(type => Game, game => game.gameNews)
