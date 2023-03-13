@@ -1,5 +1,5 @@
 import { Game } from 'src/game/entities/game.entity';
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Customer } from './Customer.entity';
 
 @Entity('customer-cart')
@@ -10,6 +10,8 @@ export class Cart {
   @ManyToOne((type) => Customer, (customer) => customer.cart)
   customer: Customer;
 
-  @ManyToOne((type) => Game)
-  game: Game;
+  
+
+  @OneToMany((type) => Game, (games) => games.cart)
+  games: Game[];
 }
