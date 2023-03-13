@@ -11,5 +11,5 @@ export class Wishlist {
   customer: Customer;
 
   @OneToMany((type) => Game, (game) => game.wishlist)
-  game: Game;
+  game: Game[];
 }

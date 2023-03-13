@@ -11,5 +11,5 @@ export class Library {
   customer: Customer;
 
   @OneToMany((type) => Game, (game) => game.library)
-  game: Game;
+  game: Game[];
 }
