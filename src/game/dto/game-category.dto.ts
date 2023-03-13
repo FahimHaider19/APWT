@@ -1,4 +1,4 @@
-export class CategoryDto {
+export class GameCategoryDto {
     categoryId: number;
     categoryName: string;
 }

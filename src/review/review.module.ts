@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
-import { GameCategory } from 'src/game/entities/game-category.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Review } from './entities/review.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([GameCategory])],
+  imports: [TypeOrmModule.forFeature([Review])],
   controllers: [ReviewController],
   providers: [ReviewService]
 })

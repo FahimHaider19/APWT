@@ -1,6 +1,6 @@
 import { Customer } from 'src/customer/entity/Customer.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-// import { User } from 'src/user/entities/user.entity';
+import { PurchaseLog } from 'src/payment/entities/purchase-log.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity('payment')
 export class Payment {
@@ -9,9 +9,6 @@ export class Payment {
 
   @ManyToOne(type => Customer, customer => customer.payments)
   customer: Customer;
-
-  @Column()
-  userId: number;
 
   @Column()
   paymentMethod: string;
@@ -24,4 +21,7 @@ export class Payment {
 
   @Column()
   verificationStatus: string;
+
+  @OneToMany((type) => PurchaseLog, (purchaseLog) => purchaseLog.payment, {cascade: true})
+  purchaseLogs: PurchaseLog[];
 }

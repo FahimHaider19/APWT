@@ -1,9 +1,11 @@
+import { CustomerDTO } from "src/customer/dto/customer.dto";
+import { GameDto } from "src/game/dto/game.dto";
+
 export class RefundDto {
     refundId: number;
-    userId: number;
-    receiptId: number;
+    cusomer: CustomerDTO;
     refundDate: Date;
     refundTotal: number;
-    refundItems: number[];
+    refundItem: GameDto;
     status: string;
 }

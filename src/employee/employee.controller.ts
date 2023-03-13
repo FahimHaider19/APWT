@@ -11,12 +11,12 @@ export class EmployeeController {
     return this.EmployeeService.getIndex();
   }
 
-  @Get('/find')
-  getemployeeByIDName(@Query() qry: any): any {
-    return this.EmployeeService.getEmployeeByIDName(qry);
-  }
+  // @Get('/find')
+  // getemployeeByIDName(@Query() qry: any): any {
+  //   return this.EmployeeService.getEmployeeByEmail(qry);
+  // }
 
-  @Get('/:id')
+  @Get(':id')
   getEmployeeByID(@Param('id', ParseIntPipe) id: number): any {
     return this.EmployeeService.getEmployeeByID(id);
   }

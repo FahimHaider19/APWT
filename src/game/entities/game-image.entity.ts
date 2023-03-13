@@ -6,7 +6,7 @@ export class GameImage {
   @PrimaryGeneratedColumn()
   gameImageId: number;
 
-  @ManyToOne(type => Game, game => game.GameImage)
+  @ManyToOne(type => Game, game => game.gameImage)
   game: Game;
 
   @Column()

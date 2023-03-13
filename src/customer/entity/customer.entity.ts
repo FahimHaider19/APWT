@@ -1,4 +1,5 @@
 import { Payment } from 'src/payment/entities/payment.entity';
+import { PurchaseLog } from 'src/payment/entities/purchase-log.entity';
 import { Review } from 'src/review/entities/review.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Cart } from './customer-cart.entity';
@@ -40,5 +41,9 @@ export class Customer {
 
   @OneToMany(type => Review, review => review.customer)
   reviews: Review;
+  
   refunds: any;
+  
+  @OneToMany(type => PurchaseLog, purchaseLog => purchaseLog.customer)
+  purchaseLogs: PurchaseLog[];
 }
