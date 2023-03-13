@@ -2,10 +2,10 @@ import { IsNotEmpty, IsNumberString } from "class-validator";
 import { Game } from "src/game/entities/game.entity";
 import { CustomerDTO } from "./customer.dto";
 
-export class LibraryDTO{
+export class cartDTO{
 
     @IsNumberString()
-    libraryId: number;
+    gameImageId: number;
 
     @IsNotEmpty()
     customer: CustomerDTO;

@@ -10,6 +10,8 @@ export class Cart {
   @ManyToOne((type) => Customer, (customer) => customer.cart)
   customer: Customer;
 
-  @OneToMany((type) => Game, (game) => game.cart)
-  game: Game[];
+  
+
+  @OneToMany((type) => Game, (games) => games.cart)
+  games: Game[];
 }
