@@ -6,4 +6,5 @@ export class PaymentDTO {
   date: Date;
   paymentTo: number;
   verificationStatus: string;
+  purchaseLogs: any;
 }

@@ -13,21 +13,31 @@ export class GameController {
 
   @Get()
   findAll() {
+    return this.gameService.findAllInfo();
+  }
+
+  @Get('/details')
+  findAllFull() {
     return this.gameService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get('/details/:id')
+  findOneFull(@Param('id') id: number) {
     return this.gameService.findOne(+id);
   }
 
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.gameService.findOneInfo(+id);
+  }
+
   @Patch(':id')
-  update(@Param('id') id: string, @Body() GameDto: GameDto) {
+  update(@Param('id') id: number, @Body() GameDto: GameDto) {
     return this.gameService.update(+id, GameDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.gameService.remove(+id);
   }
 }

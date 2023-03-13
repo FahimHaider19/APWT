@@ -1,14 +1,14 @@
 import { Customer } from 'src/customer/entity/Customer.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
-import { RefundGames } from './refund-games.entity';
+import { Game } from 'src/game/entities/game.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity('refunds')
 export class Refund {
   @PrimaryGeneratedColumn()
   refundId: number;
 
-  @ManyToOne(() => Customer)
-  customer: Customer; //many to one relationship
+  // @ManyToOne(() => Customer, customer => customer.refunds)
+  // customer: Customer;
 
   @Column()
   refundDate: Date;
@@ -16,8 +16,9 @@ export class Refund {
   @Column()
   refundTotal: number;
 
-  @OneToMany(() => RefundGames, (refundGames) => refundGames.refund)
-  refundItems: RefundGames[]; //many to one relationship
+  @OneToOne(()=> Game)
+  @JoinColumn()
+  refundItem: Game;
 
   @Column()
   status: string;
