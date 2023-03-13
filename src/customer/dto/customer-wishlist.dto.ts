@@ -11,5 +11,5 @@ export class wishlistDTO{
     customer: CustomerDTO;
     
     @IsNotEmpty()
-    game: Game;
+    game: Game[];
 }

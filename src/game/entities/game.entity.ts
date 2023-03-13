@@ -1,4 +1,6 @@
 import { Cart } from 'src/customer/entity/customer-cart.entity';
+import { Library } from 'src/customer/entity/customer-library.entity';
+import { Wishlist } from 'src/customer/entity/customer-wishlist.entity';
 import { GameCategory } from 'src/game/entities/game-category.entity';
 import { News } from 'src/news/entities/news.entity';
 import { Review } from 'src/review/entities/review.entity';
@@ -49,10 +51,15 @@ export class Game {
   @OneToMany((type) => Review, (gameReviews) => gameReviews.game)
   gameReviews: Review[];
 
+  @ManyToOne((type) => Library, (library) => library.game)
+  library: Library;
+
   @ManyToOne((type) => Cart, (cart) => cart.game)
   cart: Cart;
-  
 
+  @ManyToOne((type) => Wishlist, (wishlist) => wishlist.game)
+  wishlist: Wishlist;
+  
   @Column({nullable: true})
   isDlc: boolean;
 

@@ -8,15 +8,15 @@ export class CustomerDTO {
   @IsNotEmpty()
   name: string;
 
-  @IsEmail() 
+  @IsEmail()
   email: string;
 
-  @Length(3,8)
+  @Length(3, 8)
   password: string;
 
   @IsMobilePhone()
   phone: string;
 
- @IsNotEmpty()
+  @IsNotEmpty()
   role: string;
 }
