@@ -1,5 +1,5 @@
 import { Game } from 'src/game/entities/game.entity';
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
 import { Customer } from './Customer.entity';
 
 @Entity('customer-wishlist')
@@ -7,9 +7,9 @@ export class Wishlist {
   @PrimaryGeneratedColumn()
   gameImageId: number;
 
-  @ManyToOne((type) => Customer, (customer) => customer.wishlist)
+  @OneToOne((type) => Customer, (customer) => customer.library)
   customer: Customer;
 
-  @ManyToOne((type) => Game)
+  @OneToMany((type) => Game, (game) => game.wishlist)
   game: Game;
 }

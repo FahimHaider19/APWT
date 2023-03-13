@@ -10,9 +10,8 @@ export class Review {
     @ManyToOne(() => Customer)
     customer: Customer; //one user can have many reviews
 
-    @ManyToOne(() => Game)
+    @ManyToOne(() => Game, game => game.gameReviews)
     game: Game; //one game can have many reviews
-
 
     @Column()
     reviewDate: Date;
