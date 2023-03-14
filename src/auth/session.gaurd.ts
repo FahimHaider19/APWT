@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 export class SessionGaurd implements CanActivate {
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
         const request = context.switchToHttp().getRequest();
-        if (!request.session.user) {}
-        return true;
+        // if (!request.session.user)
+        //     return false;
+        // return true;
+        return request.isAuthenticated();
     }
 }

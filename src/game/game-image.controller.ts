@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { GameImageService } from './game-image.service';
 import { GameImageDto } from './dto/game-image.dto';
 
@@ -17,17 +17,17 @@ export class GameImageController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe) id: number) {
         return this.gameImageService.findOne(+id);
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() GameImageDto: GameImageDto) {
+    update(@Param('id', ParseIntPipe) id: number, @Body() GameImageDto: GameImageDto) {
         return this.gameImageService.update(+id, GameImageDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
+    remove(@Param('id', ParseIntPipe) id: number) {
         return this.gameImageService.remove(+id);
     }
 }
