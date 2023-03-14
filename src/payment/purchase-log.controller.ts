@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { PurchaseLogService } from './purchase-log.service';
 import { PurchaseLogDto } from './dto/purchase-log.dto';
 
@@ -17,17 +17,17 @@ export class PurchaseLogController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.purchaseLogService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() purchaseLogDto: PurchaseLogDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() purchaseLogDto: PurchaseLogDto) {
     return this.purchaseLogService.update(+id, purchaseLogDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.purchaseLogService.remove(+id);
   }
 }

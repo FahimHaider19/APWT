@@ -14,22 +14,24 @@ export class AppController {
     private authService: AuthService
   ) {}
 
-  @UseGuards(LocalAuthGuard)
   @Post('login')
+  @UseGuards(LocalAuthGuard)
   async login(@Request() req) {
     return this.authService.loginWithCredentials(req.body);
   }
+  
+  @Get('/sessiongaurd')
   @UseGuards(SessionGaurd)
-  @Get('/session')
   verifySessionGaurd(@Request() req): string {
     return req.user;
   }
+
+  @Get('/jwtgaurd')
   @UseGuards(JwtAuthGuard)
-  @Get('/session')
   verifyJwtGaurd(@Request() req): string {
     return req.user;
   }
-  //Get / logout
+
   @Get('/logout')
   logout(@Request() req): any {
     req.session.destroy();

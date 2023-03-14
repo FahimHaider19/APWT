@@ -12,6 +12,9 @@ import { ReviewModule } from './review/review.module';
 import { EmailModule } from './email/email.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { password, user } from './email/constant.email';
+import { FileUploadModule } from './file-upload/file-upload.module';
+import { APP_FILTER } from '@nestjs/core';
+import { CustomExceptionFilter } from './custom.exception.filter';
 
 @Module({
   imports: [
@@ -45,8 +48,14 @@ import { password, user } from './email/constant.email';
     NewsModule,
     ReviewModule,
     EmailModule,
+    FileUploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, 
+    {
+    provide: APP_FILTER,
+    useClass: CustomExceptionFilter,
+  }
+],
 })
 export class AppModule {}

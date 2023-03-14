@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { GameCategoryService } from './game-category.service';
 import { GameCategoryDto } from './dto/game-category.dto';
 
@@ -17,17 +17,17 @@ export class GameCategoryController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe) id: number) {
         return this.gameCategoryService.findOne(+id);
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() GameCategoryDto: GameCategoryDto) {
+    update(@Param('id', ParseIntPipe) id: number, @Body() GameCategoryDto: GameCategoryDto) {
         return this.gameCategoryService.update(+id, GameCategoryDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
+    remove(@Param('id', ParseIntPipe) id: number) {
         return this.gameCategoryService.remove(+id);
     }
 }
