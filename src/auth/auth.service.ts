@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { EmployeeService } from 'src/employee/employee.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -10,11 +11,12 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.employeeService.getEmployeeByEmail(email, password);
+    const user = await this.employeeService.getEmployeeByEmail(email);
+    const compare = await bcrypt.compare(password, user.password);
     // if(!user) user = await this.customerService.getCustomerByEmail(email, password);
-    // if(!user) user = await this.adminService.getAdminByEmail(email, password);
-    // if(!user) user = await this.developerService.getDeveloperByEmail(email, password);
-    if (user) {
+    if(!user) 
+      return new NotAcceptableException("Invalid Email. User not found");
+    else if (user && compare) {
       const { password, ...result } = user;
       return result;
     }
@@ -23,7 +25,6 @@ export class AuthService {
 
   async loginWithCredentials(user: any) {
     const payload = { email: user.username, sub: user.userId };
-
     return {
       access_token: this.jwtService.sign(payload),
     };

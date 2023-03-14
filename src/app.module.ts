@@ -9,13 +9,12 @@ import { AuthModule } from './auth/auth.module';
 import { GameModule } from './game/game.module';
 import { NewsModule } from './news/news.module';
 import { ReviewModule } from './review/review.module';
+import { EmailModule } from './email/email.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { password, user } from './email/constant.email';
 
 @Module({
   imports: [
-    AuthModule,
-    CustomerModule,
-    EmployeeModule,
-    PaymentModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -26,9 +25,26 @@ import { ReviewModule } from './review/review.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        port: 465,
+        ignoreTLS: true,
+        secure: true,
+        auth: {
+          user: user,
+          pass: password,
+        },
+      },
+    }),
+    AuthModule,
+    CustomerModule,
+    EmployeeModule,
+    PaymentModule,
     GameModule,
     NewsModule,
     ReviewModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

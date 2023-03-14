@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EmployeeEntity } from './entities/employee.entity';
 import { EmployeeDTO } from './dto/employeeDTO.dto';
+import { saltOrRounds } from 'src/auth/constants';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class EmployeeService {
@@ -41,18 +43,24 @@ export class EmployeeService {
   //   }
   // }
 
-  getEmployeeByEmail(email, password): any {
+  // getEmployeeByEmail(email, password): any {
+  //   return this.EmployeeRepo.findOne({
+  //     where: { email: email, password: password },
+  //   });
+  // }
+
+  getEmployeeByEmail(email): any {
     return this.EmployeeRepo.findOne({
-      where: { email: email, password: password },
+      where: { email: email},
     });
   }
 
-  addEmployee(employeeDTO: EmployeeDTO): any {
+  async addEmployee(employeeDTO: EmployeeDTO) {
     const employee = new EmployeeEntity();
     employee.name = employeeDTO.name;
     employee.email = employeeDTO.email;
     employee.phone = employeeDTO.phone;
-    employee.password = employeeDTO.password;
+    employee.password = await bcrypt.hash(employeeDTO.password, saltOrRounds);
     // employee.verificationStatus = false;
     return this.EmployeeRepo.save(employee);
   }
