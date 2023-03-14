@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards
 import { cartService } from "./customer-cart.service";
 import { cartDTO } from "./dto/customer-cart.dto";
 import { SessionGuard } from "./session.guard";
-
+//controller
 @UseGuards(SessionGuard)
 @Controller('cart')
 export class cartController {
