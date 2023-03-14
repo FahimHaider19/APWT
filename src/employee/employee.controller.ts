@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Delete, Param, Post, Put, Query, ParseIntPipe, UsePipes, ValidationPipe} from '@nestjs/common';
+import { Controller, Get, Body, Delete, Param, Post, Put, Query, Request, ParseIntPipe, UsePipes, ValidationPipe, Session} from '@nestjs/common';
 import { EmployeeDTO } from './dto/employeeDTO.dto';
 import { EmployeeService } from './employee.service';
 
@@ -11,28 +11,23 @@ export class EmployeeController {
     return this.EmployeeService.getIndex();
   }
 
-  // @Get('/find')
-  // getemployeeByIDName(@Query() qry: any): any {
-  //   return this.EmployeeService.getEmployeeByEmail(qry);
-  // }
-
   @Get(':id')
   getEmployeeByID(@Param('id', ParseIntPipe) id: number): any {
     return this.EmployeeService.getEmployeeByID(id);
   }
 
-  @Post('/add')
+  @Post('')
   @UsePipes(new ValidationPipe())
   addEmployee(@Body() employeeDTO: EmployeeDTO): any {
     return this.EmployeeService.addEmployee(employeeDTO);
   }
 
-  @Put('/update')
-  updateEmployee(
-    @Body() employeeDTO: EmployeeDTO,
-    // @Body('id', ParseIntPipe) id: number,
-  ): any {
-    return this.EmployeeService.updateEmployee( employeeDTO,employeeDTO.userId);
+  @Put('/updateprofile')
+  @UsePipes(new ValidationPipe())
+  updateEmployee(@Request() req, @Body() employeeDTO: EmployeeDTO): any {
+    const userId = req.session['passport']['user'].userId;
+    console.log(userId);
+    return this.EmployeeService.updateEmployee(employeeDTO, userId);
   }
 
   @Put('/update/:id')
