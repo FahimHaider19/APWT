@@ -7,15 +7,15 @@ export class PaymentDTO {
 
   userId: number;
   
-  @IsNotEmpty()
-  @IsNumber()
+  @IsNotEmpty({message:"Amount is required"})
+  @IsNumber({},{message:"Amount must be a number"})
   amount: number;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: "Amount is required" })
   paymentMethod: string;
 
-  @IsNotEmpty()
-  @IsDate()
+  @IsNotEmpty({ message: "Amount is required" })
+  @IsDate({message:"Date must be a date"})
   date: Date;
 
   verificationStatus: string;

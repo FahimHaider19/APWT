@@ -16,6 +16,6 @@ export class PurchaseLog {
     @Column()
     paidAmount: number;
 
-    @ManyToOne(type => Payment, payment => payment.purchaseLogs)
+    @ManyToOne(type => Payment, payment => payment.purchaseLogs, {onDelete: 'CASCADE'})
     payment: Payment;
 }

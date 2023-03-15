@@ -13,8 +13,9 @@ import { EmailModule } from './email/email.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { password, user } from './email/constant.email';
 import { FileUploadModule } from './file-upload/file-upload.module';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { CustomExceptionFilter } from './custom.exception.filter';
+import { RolesGuard } from './auth/roles.gaurd';
 
 @Module({
   imports: [
@@ -53,9 +54,13 @@ import { CustomExceptionFilter } from './custom.exception.filter';
   controllers: [AppController],
   providers: [AppService, 
     {
-    provide: APP_FILTER,
-    useClass: CustomExceptionFilter,
-  }
+      provide: APP_FILTER,
+      useClass: CustomExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    }
 ],
 })
 export class AppModule {}

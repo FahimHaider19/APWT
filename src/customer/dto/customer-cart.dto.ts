@@ -1,15 +1,20 @@
-import { IsNotEmpty, IsNumberString } from "class-validator";
+import { IsInt, IsNotEmpty, IsNumberString } from "class-validator";
+import { GameDto } from "src/game/dto/game.dto";
 import { Game } from "src/game/entities/game.entity";
 import { CustomerDTO } from "./customer.dto";
 
 export class cartDTO{
 
-    @IsNumberString()
+    @IsInt()
+    @IsNotEmpty()
     gameImageId: number;
 
     @IsNotEmpty()
-    customer: CustomerDTO;
+    customerid: number;
 
     @IsNotEmpty()
-    game: Game;
+    gameid:number;
+    @IsNotEmpty()
+    time:string;
+
 }

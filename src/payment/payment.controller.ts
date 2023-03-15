@@ -1,43 +1,71 @@
-import { Controller, Get, Body, Delete, Param, Post, Put, Query} from '@nestjs/common';
+import { Controller, Get, Body, Delete, Param, Post, Put, Request, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt.gaurd';
+import { Roles } from 'src/auth/roles.decorator';
+import { SessionGaurd } from 'src/auth/session.gaurd';
 import { PaymentDTO } from './dto/paymentDTO.dto';
 import { PaymentService } from './payment.service';
 
 @Controller('payment')
 export class PaymentController {
-    constructor(private PaymentService: PaymentService){}
+  constructor(private PaymentService: PaymentService) { }
 
   @Get("/")
-    getPayment(): any { 
-        return this.PaymentService.getIndex();
-    }
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("employee")
+  getPayment(): any {
+    return this.PaymentService.getIndex();
+  }
 
-    // @Get("/find")
-    // getpaymentByIDName(@Query() qry:any): any {
-    //   return this.PaymentService.getPaymentByIDName(qry);
-    // }  
+  @Get("/:id")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("employee")
+  getPaymentByID(@Param("id") id: number): any {
+    return this.PaymentService.getPaymentByID(id);
+  }
 
-    @Get("/:id")
-    getPaymentByID(@Param("id") id:number): any {
-      return this.PaymentService.getPaymentByID(id);
-    }
+  @Get("/paymenthistory")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("customer")
+  getPaymentHistory(@Request() req): any {
+    const userId = req.session['passport']['user'].userId;
+    return this.PaymentService.getPaymentByID(userId);
+  }
 
-    @Post("/add")
-    addPayment(@Body() paymentDTO:PaymentDTO): any {
-      return this.PaymentService.AddPayment(paymentDTO);
-    }
+  @Get("/makepayment")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("cutomer")
+  viewCartPayment(@Body() paymentDTO: PaymentDTO): any {
+    //show cart price and ask for payment
+  }
 
-    @Put("/:id")
-    updatePayment(@Param("id") id: number, @Body() paymentDTO: PaymentDTO): any {
-      return this.PaymentService.updatePayment(paymentDTO, id);
-    }
+  @Post("/makepayment")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("cutomer")
+  makePayment(@Body() paymentDTO: PaymentDTO): any {
+    return this.PaymentService.AddPayment(paymentDTO);
+  }
 
-    @Delete(":id")
-    deletePaymentById(@Param("id") id:number): any {
-      return this.PaymentService.deletePaymentById(id);
-    }
+  @Post("/")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("employee")
+  @UsePipes(new ValidationPipe())
+  addPayment(@Body() paymentDTO: PaymentDTO): any {
+    return this.PaymentService.AddPayment(paymentDTO);
+  }
 
-    // @Get("user/:id")
-    // getUserPayments(@Param("id") id:number): any {
-    //   return this.PaymentService.getUserPayments(id);
-    // }
+  @Put(":id")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("employee")
+  @UsePipes(new ValidationPipe())
+  updatePayment(@Param("id") id: number, @Body() paymentDTO: PaymentDTO): any {
+    return this.PaymentService.updatePayment(paymentDTO, id);
+  }
+
+  @Delete(":id")
+  @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
+  @Roles("employee")
+  deletePaymentById(@Param("id") id: number): any {
+    return this.PaymentService.deletePaymentById(id);
+  }
+
 }

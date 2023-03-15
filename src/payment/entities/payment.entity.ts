@@ -22,6 +22,6 @@ export class Payment {
   @Column()
   verificationStatus: string;
 
-  @OneToMany((type) => PurchaseLog, (purchaseLog) => purchaseLog.payment, {cascade: true})
+  @OneToMany((type) => PurchaseLog, (purchaseLog) => purchaseLog.payment, {cascade: true, onDelete: 'CASCADE'})
   purchaseLogs: PurchaseLog[];
 }

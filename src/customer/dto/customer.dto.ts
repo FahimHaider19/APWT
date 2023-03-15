@@ -1,8 +1,8 @@
-import { IsEmail, IsMobilePhone, IsNotEmpty, IsNumberString, Length } from "class-validator";
+import { IsEmail, IsInt, IsMobilePhone, IsNotEmpty, IsNumberString, Length } from "class-validator";
 
 export class CustomerDTO {
-
-  @IsNumberString()
+  @IsInt()
+  @IsNotEmpty()
   userId: number;
 
   @IsNotEmpty()
@@ -19,4 +19,5 @@ export class CustomerDTO {
 
   @IsNotEmpty()
   role: string;
+  filename: string;
 }

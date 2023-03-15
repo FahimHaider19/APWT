@@ -46,4 +46,6 @@ export class Customer {
   
   @OneToMany(type => PurchaseLog, purchaseLog => purchaseLog.customer)
   purchaseLogs: PurchaseLog[];
+  @Column()
+  filename:string;
 }

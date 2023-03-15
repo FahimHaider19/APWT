@@ -35,7 +35,7 @@ import {
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 
-@Catch()
+@Catch(UnauthorizedException)
 export class CustomExceptionFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) { }
 

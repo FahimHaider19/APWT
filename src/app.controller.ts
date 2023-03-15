@@ -6,6 +6,7 @@ import { RolesGuard } from './auth/roles.gaurd';
 import { LocalAuthGuard } from './auth/local.gaurd';
 import { SessionGaurd } from './auth/session.gaurd';
 import { JwtAuthGuard } from './auth/jwt.gaurd';
+import { Roles } from './auth/roles.decorator';
 
 @Controller()
 export class AppController {
@@ -23,6 +24,20 @@ export class AppController {
   @Get('/sessiongaurd')
   @UseGuards(SessionGaurd)
   verifySessionGaurd(@Request() req): string {
+    return req.user;
+  }
+
+  @Get('/empgaurd')
+  @Roles("employee")
+  // @UseGuards(SessionGaurd)
+  verifyRoleEmployeeGaurd(@Request() req): string {
+    return req.user;
+  }
+
+  @Get('/customergaurd')
+  @Roles("customer")
+  @UseGuards(SessionGaurd)
+  verifyRoleCustomerGaurd(@Request() req): string {
     return req.user;
   }
 
