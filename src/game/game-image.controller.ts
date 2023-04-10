@@ -4,6 +4,7 @@ import { GameImageDto } from './dto/game-image.dto';
 import { SessionGaurd } from 'src/auth/session.gaurd';
 import { JwtAuthGuard } from 'src/auth/jwt.gaurd';
 import { Roles } from 'src/auth/roles.decorator';
+import { GameImage } from './entities/game-image.entity';
 
 @Controller('game-image')
 export class GameImageController {
@@ -12,9 +13,11 @@ export class GameImageController {
     @Post()
     @UseGuards(SessionGaurd/*,JwtAuthGuard*/)
     @Roles("employee")
-    @UsePipes(new ValidationPipe())
+    // @UsePipes(new ValidationPipe())
     create(@Body() GameImageDto: GameImageDto) {
-        return this.gameImageService.create(GameImageDto);
+        const game = new GameImage();
+        game.link = GameImageDto.link;
+        return this.gameImageService.create(game);
     }
 
     @Get() 

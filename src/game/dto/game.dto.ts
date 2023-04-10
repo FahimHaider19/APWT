@@ -7,11 +7,8 @@ export class GameDto {
   gameId: number;
 
   @IsNotEmpty()
-  @Min(3)
   gameName: string;
 
-  @IsNotEmpty()
-  @Min(20)
   gameDescription: string;
 
   @IsNotEmpty()
@@ -27,7 +24,6 @@ export class GameDto {
   gameRating: number;
 
   @IsNotEmpty()
-  @IsDate()
   gameReleaseDate: Date;
 
   // gameDeveloper: string;
@@ -37,7 +33,7 @@ export class GameDto {
 
   @IsNotEmpty()
   systemRequirments: string;
-  gameImage: GameImageDto[]; //one to many
+  gameImage: any[]; //one to many
   gameCategory: GameCategoryDto[]; //one to many
   gameNews: NewsDto[]; //one to many
   gameReviews: number; //one to many

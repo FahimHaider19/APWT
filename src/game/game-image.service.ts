@@ -12,9 +12,9 @@ export class GameImageService {
     ) { }
 
     create(gameImageDto: GameImageDto) {
-        const gameImage = new GameImageDto();
+        const gameImage = new GameImage();
         gameImage.link = gameImageDto.link;
-        return this.GameImageRepo.save(gameImageDto);
+        return this.GameImageRepo.save(gameImage);
     }
 
     findAll() {
